@@ -1,7 +1,6 @@
 ---
 - name: Gather system info and create a user
   hosts: localhost
-  become: yes
   tasks:
     - name: Gather OS info
       ansible.builtin.setup:
