@@ -1,0 +1,9 @@
+---
+- name: Update all packages on target hosts
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update all packages (RedHat/CentOS/Fedora)
+      yum:
+        name: '*'
+        state: latest
