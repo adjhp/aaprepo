@@ -1,9 +1,18 @@
 ---
-- name: Update all packages on target hosts
-  hosts: all
+- name: Gather system info and create a user
+  hosts: localhost
   become: yes
   tasks:
-    - name: Update all packages (RedHat/CentOS/Fedora)
-      yum:
-        name: '*'
-        state: latest
+    - name: Gather OS info
+      ansible.builtin.setup:
+        filter: ansible_distribution*
+    
+    - name: Gather RAM info
+      ansible.builtin.setup:
+        filter: ansible_memtotal_mb
+
+    - name: Create a user
+      ansible.builtin.user:
+        name: newuser
+        state: present
+        shell: /bin/bash
