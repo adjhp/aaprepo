@@ -1,0 +1,17 @@
+---
+- name: Gather system info and create a user
+  hosts: localhost
+  tasks:
+    - name: Gather OS info
+      ansible.builtin.setup:
+        filter: ansible_distribution*
+    
+    - name: Gather RAM info
+      ansible.builtin.setup:
+        filter: ansible_memtotal_mb
+
+    - name: Create a user
+      ansible.builtin.user:
+        name: newuser
+        state: present
+        shell: /bin/bash
