@@ -15,7 +15,7 @@
             labels:
               app: "{{ vm_name }}"
               kubevirt.io/dynamic-credentials-support: 'true'
-              vm.kubevirt.io/template: rhel9-server-small
+              vm.kubevirt.io/template: "{{ rhel_os_version }}-server-small"
               vm.kubevirt.io/template.namespace: openshift
               vm.kubevirt.io/template.revision: '1'
               vm.kubevirt.io/template.version: v0.26.0
@@ -29,7 +29,7 @@
                 spec:
                   sourceRef:
                     kind: DataSource
-                    name: rhel9
+                    name: "{{ rhel_os_version }}"
                     namespace: openshift-virtualization-os-images
                   storage:
                     resources:
@@ -69,7 +69,7 @@
                     bootloader:
                       efi: {}
                   machine:
-                    type: pc-q35-rhel9.2.0
+                    type: pc-q35-"{{ rhel_os_version }}".2.0
                   memory:
                     guest: 2Gi
                 networks:
